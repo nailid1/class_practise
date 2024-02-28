@@ -1,0 +1,34 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.i-add{
+    margin: 120px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: right;
+    margin-right: 150px;
+}
+.log{
+    display: flex;
+    align-items: flex-end;
+    margin: 15px;
+    margin-right: 40px;
+}
+.box{
+    margin: 100px;
+}
+.card{
+    
+}
+.box:hover {
+    background:rgba(228, 232, 233, 0.8);
+    background-color: #c2bebe;
+    border-radius: 0.7em;
+    bottom: -3em;
+  box-shadow: 3px 3px 20px;
+  transition: 0.7s;
+  z-index: 1;
+  background: "#118799"
+  }
