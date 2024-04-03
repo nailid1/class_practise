@@ -28,7 +28,6 @@ class Login extends React.Component {
         .then((res) => {
           const user = res.user;
           console.log("user -- ", user);
-          // window.location.assign("/main")
            signIn();
           this.props.navigation("/main");
         }  
