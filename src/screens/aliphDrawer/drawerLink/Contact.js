@@ -11,7 +11,7 @@ class ContactUs extends React.Component {
     return (
       <>
         <Box sx={{ display: "flex", alignItems: "flex-start" }}>
-          <MainDrawer />
+          <MainDrawer value={true} />
           <Box
             sx={{
               display: "flex",
@@ -57,6 +57,7 @@ class ContactUs extends React.Component {
                   fontFamily: "Montserrat-Regular",
                   fontWeight: "400",
                   size: "16px",
+                  textAlign: "justify",
                 }}
               >
                 If you have any questions, comments, or feedback, please don't
@@ -131,6 +132,6 @@ const webStyles = {
     width: "20vw",
     justifyContent: "flex-start",
     gap: "0.5vw",
-    margin: "1vw"
+    margin: "1vw",
   },
 };

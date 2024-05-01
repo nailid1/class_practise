@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 import MainDrawer from "../MainDrawer";
 
+
 class NeedHelp extends React.Component {
   constructor() {
     super();
@@ -10,7 +11,8 @@ class NeedHelp extends React.Component {
     return (
       <>
         <Box sx={{ display: "flex", alignItems: "flex-start" }}>
-          <MainDrawer />
+          <MainDrawer value={true} />
+
           <Box sx={webStyles.outerBox}>
             <Box sx={{ margin: "20px", marginTop: 0 }}>
               <Typography style={webStyles.help} variant="h4">

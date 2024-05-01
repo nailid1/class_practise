@@ -17,7 +17,7 @@ class FAQ extends React.Component {
     return (
       <>
         <Box sx={{ display: "flex", alignItems: "flex-start" }}>
-          <MainDrawer />
+          <MainDrawer value={true} />
           <Box
             sx={{
               display: "flex",
@@ -74,7 +74,14 @@ class FAQ extends React.Component {
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Box sx={{ marginLeft: "35px" }}>
+                  <Box
+                    sx={{
+                      marginLeft: "35px",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "baseline",
+                    }}
+                  >
                     <Typography
                       variant="subtitle1"
                       style={{

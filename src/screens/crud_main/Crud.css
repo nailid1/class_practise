@@ -19,9 +19,7 @@
 .box{
     margin: 100px;
 }
-.card{
-    
-}
+
 .box:hover {
     background:rgba(228, 232, 233, 0.8);
     background-color: #c2bebe;

@@ -19,7 +19,23 @@ import wallet from "../../assets/wallet.png";
 import settings from "../../assets/settings.png";
 import bell from "../../assets/notification.png";
 import aliphImg from "../../assets/Aliph.png";
+import reset from "../../assets/reset.png";
+import note from "../../assets/note.png";
+import help from "../../assets/help.png";
+import logout from "../../assets/logout.png";
+import hc from "../../assets/hc.png";
+import faq from "../../assets/faq.png";
+import contact from "../../assets/contact.png";
+import ac from "../../assets/contact.png";
+import profile from "../../assets/profile.png";
+import lock from "../../assets/lock.png";
 import { Link } from "react-router-dom";
+import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import { signOut } from "firebase/auth";
+import { auth } from "../../config/FirebaseConfig";
+import { withRouter } from "../register/WithRouter";
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const drawerWidth = "9vw";
 
@@ -50,7 +66,6 @@ const SetStyledDrawerPaper = styled("div")(({ theme }) => ({
 const FireNav = styled(List)({
   "& .css-10hburv-MuiTypography-root": {
     fontWeight: "700",
-    lineHeight: "19.5px",
     color: "#333333",
   },
   "& .css-h4y409-MuiList-root": {
@@ -61,22 +76,65 @@ const FireNav = styled(List)({
     justifyContent: "center",
   },
 });
+const FireNav2 = styled(List)({
+  "& .css-10hburv-MuiTypography-root": {
+    fontWeight: "600",
+    fontFamily: "Montserrat-Bold",
+    fontSize: "16px",
+    color: "#999999",
+  },
+  "& .css-h4y409-MuiList-root": {
+    display: "flex",
+    flexDirection: "column",
+    marginRight: "55px",
+    justifyContent: "center",
+    width: "max-content",
+    marginLeft: "-4vw",
+  },
+});
+const FireNav3 = styled(List)({
+  "& .css-10hburv-MuiTypography-root": {
+    fontWeight: "600",
+    fontFamily: "Montserrat-Bold",
+    fontSize: "16px",
+    color: "#999999",
+  },
+  "& .css-h4y409-MuiList-root": {
+    display: "flex",
+    flexDirection: "column",
+    marginRight: "55px",
+    //   marginTop: "2vw",
+    justifyContent: "center",
+    width: "max-content",
+    marginLeft: "-4vw",
+  },
+});
 class MainDrawer extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    // this.logOut = this.logOut.bind(this);
     this.state = {
       isMainDrawerOpen: true,
       isSettingsDrawerOpen: false,
       isHelpDrawerOpen: false,
     };
   }
-
+  componentDidMount = () => {
+    console.log("PROPS", this.props.value);
+    // console.log("PROPS logout", this.props.logOut);
+    if (this.props.value == true) {
+      this.setState({ isSettingsDrawerOpen: true, isHelpDrawerOpen: true });
+    }
+  };
   toggleMainDrawer = () => {
     this.setState((preState) => ({
       isMainDrawerOpen: !preState.isMainDrawerOpen,
     }));
   };
   toggleSettingsDrawer = () => {
+    if(this.state.isHelpDrawerOpen == true){
+        this.setState({isHelpDrawerOpen: false})
+    }
     this.setState((prevState) => ({
       isSettingsDrawerOpen: !prevState.isSettingsDrawerOpen,
     }));
@@ -86,6 +144,25 @@ class MainDrawer extends React.Component {
       isHelpDrawerOpen: !prevState.isHelpDrawerOpen,
     }));
   };
+
+  logOut = () => {
+    // const { logout } = this.props;
+    console.log("logout running");
+    signOut(auth)
+      .then(() => {
+        // if (typeof this.props.logout === "function") {
+        // //   this.props.logOut();
+        // } else {
+        //   console.error("logout function is not passed correctly.");
+        // }
+        console.log("User signed out successfully");
+        alert("You have logged Out Successfully .");
+        this.props.navigation("/");
+      })
+      .catch((error) => {
+        console.error("Error signing out:", error);
+      });
+  };
   render() {
     const { isMainDrawerOpen, isSettingsDrawerOpen, isHelpDrawerOpen } =
       this.state;
@@ -93,14 +170,14 @@ class MainDrawer extends React.Component {
       {
         text: "Dashboard",
         icon: <Box component={"img"} src={home} />,
-        link: "/dashboard",
+        // link: "/dashboard",
       },
       { text: "QR code generator", icon: <Box component={"img"} src={qr} /> },
       { text: "Transactions", icon: <Box component={"img"} src={dollar} /> },
       {
         text: "Wallet",
         icon: <Box component={"img"} src={wallet} />,
-        link: "/faq",
+        // link: "/faq",
       },
       {
         text: "Settings",
@@ -110,45 +187,43 @@ class MainDrawer extends React.Component {
       {
         text: "Notifications",
         icon: <Box component={"img"} src={bell} />,
-        link: "/notifications",
+        // link: "/notifications",
       },
     ];
     const navigationSetItemsSet = [
       {
         text: "Account creation",
-        icon: <Box component={"img"} src={home} />,
-        link: "/dashboard",
+        icon: <Box component={"img"} src={ac} /> ,
       },
-      { text: "Profile", icon: <Box component={"img"} src={qr} /> },
-      { text: "Reset passcode", icon: <Box component={"img"} src={dollar} /> },
+      { text: "Profile", icon: <Box component={"img"} src={profile} /> , },
+      { text: "Reset passcode", icon: <Box component={"img"} src={reset} /> },
+      { text: "Reset password", icon: <Box component={"img"} src={lock} /> , },
       {
         text: "Terms & conditions",
-        icon: <Box component={"img"} src={wallet} />,
-        link: "/faq",
+        icon: <Box component={"img"} src={note} />,
+        // link: "/faq",
       },
       {
         text: "Need help?",
-        icon: <Box component={"img"} src={settings} />,
+        icon: <Box component={"img"} src={help} />,
         onClick: this.toggleHelpDrawer,
       },
       {
         text: "Logout",
-        icon: <Box component={"img"} src={bell} />,
-        link: "/notifications",
+        icon: <Box component={"img"} src={logout} />,
+        onClick: this.logOut,
       },
     ];
     const navigationHelpItemsSet = [
       {
         text: "Help center questions",
-        icon: <Box component={"img"} src={home} />,
+        icon: <Box component={"img"} src={hc} />,
         link: "/help",
       },
-      { text: "FAQ", icon: <Box component={"img"} src={qr} />,
-       link: "/faq"
-    },
+      { text: "FAQ", icon: <Box component={"img"} src={faq} />, link: "/faq" },
       {
         text: "Contact Us",
-        icon: <Box component={"img"} src={wallet} />,
+        icon: <Box component={"img"} src={contact} />,
         link: "/contact",
       },
     ];
@@ -167,7 +242,6 @@ class MainDrawer extends React.Component {
             anchor="left"
             variant="permanent"
             open={isMainDrawerOpen}
-            // onClose={this.toggleMainDrawer}
           >
             <StyledDrawerPaper>
               <Box
@@ -210,9 +284,12 @@ class MainDrawer extends React.Component {
                   <Box
                     sx={{
                       display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-evenly",
-                      marginTop: "20px",
+                      alignItems: "baseline",
+                      justifyContent: "flex-start",
+                      marginTop: "-1vw",
+                      marginLeft: "-2vw",
+                      color: "#666666",
+                      height: "fit-content",
                     }}
                   >
                     <Typography
@@ -226,7 +303,7 @@ class MainDrawer extends React.Component {
                       Settings
                     </Typography>
                   </Box>
-                  <FireNav>
+                  <FireNav2>
                     <List>
                       {navigationSetItemsSet.map(
                         ({ text, icon, link, onClick }, index) => (
@@ -246,7 +323,7 @@ class MainDrawer extends React.Component {
                         )
                       )}
                     </List>
-                  </FireNav>
+                  </FireNav2>
                 </Box>
               </SetStyledDrawerPaper>
             </div>
@@ -256,12 +333,11 @@ class MainDrawer extends React.Component {
               style={{
                 borderRight: "1px solid #999999",
                 padding: "40px",
-                background: "pink",
               }}
             >
               <SetStyledDrawerPaper>
                 <Box sx={{ width: "9vw", height: "950px" }}>
-                  <FireNav>
+                  <FireNav3>
                     <List>
                       {navigationHelpItemsSet.map(
                         ({ text, icon, link, onClick }, index) => (
@@ -281,17 +357,15 @@ class MainDrawer extends React.Component {
                         )
                       )}
                     </List>
-                  </FireNav>
+                  </FireNav3>
                 </Box>
               </SetStyledDrawerPaper>
             </div>
           )}
-          {/* <Drawer key="drawer1" docked={false}></Drawer>
-          <Drawer key="drawer2" docked={false} openSecondary={true}></Drawer> */}
         </Box>
       </>
     );
   }
 }
 
-export default MainDrawer;
+export default withRouter(MainDrawer);

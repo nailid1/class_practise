@@ -49,12 +49,14 @@ class LoginNew extends React.Component {
           const user = res.user;
           console.log("user -- ", user);
           signIn();
-          this.props.navigation("/main");
+          this.props.navigation("/side");
         })
         .catch((err) => {
           console.log("err -- > ", err);
+          // this.setState({error: err})
           if (err === "auth/invalid-email") {
             alert("Invalid email");
+            // this.setState({error: err})
           }
         });
     } catch (error) {
@@ -65,12 +67,7 @@ class LoginNew extends React.Component {
     return (
       <>
         <Box sx={webStyles.box1}>
-          <Box
-            component="img"
-            src={aliphImg}
-            mt={2}
-            sx={webStyles.imgAliph}
-          ></Box>
+          <Box component="img" src={aliphImg} sx={webStyles.imgAliph}></Box>
           <Box component="img" src={loginBg1} sx={webStyles.imgBg1}></Box>
         </Box>
         <Box sx={webStyles.formContainer} data-testid="login-form">
@@ -82,6 +79,11 @@ class LoginNew extends React.Component {
               <Typography variant="subtitle1" style={webStyles.typoDes}>
                 Please enter your registered phone number and password to login.
               </Typography>
+              {this.state.error ? (
+                  <small className="error-field" style={webStyles.error}>
+                    Required Field !
+                  </small>
+                ) : null}
               <Box sx={webStyles.field}>
                 <Box>
                   <InputLabel sx={webStyles.labelInput} data-testid="contact">
@@ -99,9 +101,6 @@ class LoginNew extends React.Component {
                     }}
                   />
                 </Box>
-                {this.state.error ? (
-                  <small className="error-field">Required Field !</small>
-                ) : null}
                 <Box>
                   <InputLabel
                     sx={webStyles.labelInput}
@@ -119,27 +118,7 @@ class LoginNew extends React.Component {
                     onChange={(e) => {
                       this.handleChange(e);
                     }}
-                    // InputProps={{
-                    //   endAdornment: (
-                    //     <InputAdornment position="end" sx={webStyles.eye}>
-                    //       <IconButton
-                    //         aria-label="toggle password visibility"
-                    //         onClick={this.handleClickShowPassword}
-                    //         edge="end"
-                    //       >
-                    //         {this.state.showPassword ? (
-                    //           <VisibilityOff />
-                    //         ) : (
-                    //           <Visibility />
-                    //         )}
-                    //       </IconButton>
-                    //     </InputAdornment>
-                    //   ),
-                    // }}
                   ></CssTextField>
-                  {this.state.error ? (
-                    <small className="error-field">Required Field !</small>
-                  ) : null}
                 </Box>
               </Box>
               <Box sx={webStyles.btnBox}>
@@ -216,14 +195,14 @@ const ColorButton = styled(Button)(
     fontFamily: "Montserrat-Bold",
     fontWeight: "600",
     fontSize: "16px",
-    lineHeight: "24px",
+    // lineHeight: "24px",
     borderRadius: "8px",
     width: "26vw",
     height: "6.2vh",
     "&:hover": {
       backgroundColor: "#3FB98C",
     },
-    marginTop: "4vw",
+    marginTop: "3vw",
     "@media (min-width:600px) and (max-width:900px)": {
       width: "55vw",
       height: "6.3vh",
@@ -241,6 +220,7 @@ const ColorButton = styled(Button)(
 );
 
 const webStyles = {
+  error: { color: "red", fontWeight: "400", fontSize:"18px" },
   eye: {
     ml: {
       xl: "12vw",
@@ -290,10 +270,7 @@ const webStyles = {
   imgAliph: {
     height: "13.2vh",
     width: "10.8vw",
-    mt: "-7vh",
-    // "@media (min-width:901px) and (max-width:1200px)": {
-    //   marginLeft: "26.04vw",
-    // },
+    mt: "-3vh",
     "@media (min-width:450px) and (max-width:1280px)": {
       margin: "0.5208333333333334vw",
       height: "10vh",
@@ -307,7 +284,7 @@ const webStyles = {
   },
   imgBg1: {
     width: "32.424vw", //622.53
-    height: "52vh",
+    // height: "52vh",
     top: "-25.9vw",
     left: "94.9vw",
     radius: "5.73vw",
@@ -448,14 +425,14 @@ const webStyles = {
     color: "#031417",
     fontWeight: "700",
     fontSize: "18px",
-    lineHeight: "24px",
-    mb: "10px",
+    // lineHeight: "24px",
+    // mb: "10px",
     ml: "0.5vw",
     fontFamily: "Montserrat-Bold",
   },
   btnBox: {
-    mt: "-30px",
-    mb: "10px",
+    // mt: "-30px",
+    // mb: "10px",
     "@media (min-width:700px) and (max-width:804px)": {
       marginTop: "0vw",
       marginBottom: "1vw",

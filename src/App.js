@@ -31,7 +31,7 @@ class App extends React.Component {
     this.setState((prevState) => ({ isAuthenticated: true }));
   };
 
-  logout = () => {
+  logOut = () => {
     this.setState((prevState) => ({ isAuthenticated: false }));
   };
 
@@ -42,10 +42,13 @@ class App extends React.Component {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LoginNew signIn={this.signIn} />} />
-            <Route path="/register" element={<Register />} />
+            {/* <Route path="/register" element={<Register />} /> */}
+
             <Route element={<Protected authenticated={isAuthenticated} />}>
-              <Route path="/main" element={<Crud logout={this.logout} />} />
+              {/* <Route path="/main" element={<Crud logout={this.logout} />} /> */}
+              <Route path="/side" element={<MainDrawer />} />
             </Route>
+
             <Route path="/create-profile" element={<CreateProfile />} />
             <Route path="/tandc" element={<TermsConditions />} />
             <Route path="/forgot" element={<ForgotPassword />} />
